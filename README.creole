@@ -10,10 +10,12 @@ badfiles <path>
 
 == Installation
 
+{{{
 sudo apt-get install libmagickcore-dev libmagickwand-dev
 # Install RVM: http://beginrescueend.com/
 gem install bundler
 bundle install
+}}}
 
 == Supported File Types
 
