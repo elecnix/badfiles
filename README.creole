@@ -6,7 +6,9 @@ When transferring data, there's always a chance of corrupting a file, for variou
 
 == Usage
 
+{{{
 badfiles <path>
+}}}
 
 == Installation
 
