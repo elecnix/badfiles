@@ -1,0 +1,20 @@
+= Find Bad Files
+
+Find broken pictures and documents on your hard drive.
+
+When transferring data, there's always a chance of corrupting a file, for various reasons. Good file transfer software performs checksums, but not all do, and even when they do, it can still happen. For example, the file transfer could be interrupted, and leave partially transferred files.
+
+Usage:
+
+badfiles <path>
+
+Supported:
+ * JPG, PNG, GIF
+
+Unsupported:
+ * PDF
+ * LibreOffice
+ * Microsoft Word
+ * Microsoft Excel
+ * HTML
+ * ISO
