@@ -25,11 +25,12 @@ class BadFiles
 
   def check filename
     begin
-      _, handler = @@patterns.find{|p, _| File.extname(filename) =~ p}
-      if handler
-        handler.call filename
-        puts "[ \e[32mOK\e[0m ] #{filename}"
+      @@patterns.each do |pattern, handler|
+        if File.extname(filename) =~ pattern
+          handler.call filename
+        end
       end
+      puts "[ \e[32mOK\e[0m ] #{filename}"
       nil
     rescue
       puts "[ \e[31mBAD\e[0m ] #{filename}: #{$!}"
