@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class RMagickPlugin
+class MD5Plugin
   BadFiles.register_extensions /\.md5/i do |file|
     expected = read_checksum(file)
     if expected
