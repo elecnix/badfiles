@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
-puts "usage:"
-puts "  badfiles <path>"
+load "core/badfiles.rb"
+Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each {|file| require file }
+
+bf = BadFiles.new
+bf.scan File.expand_path(ARGV[0])
+bf.print_summary
 
