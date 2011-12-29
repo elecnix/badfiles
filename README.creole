@@ -22,7 +22,9 @@ bundle install
 == Supported File Types
 
 Supported:
- * JPG, PNG, GIF, PDF
+ * Images: JPG, PNG, GIF, TIFF
+ * PDF
+ * ODT (OpenDocument / LibreOffice)
  * <filename>.md5
 
 Unsupported:
