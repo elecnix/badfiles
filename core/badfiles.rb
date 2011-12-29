@@ -1,7 +1,7 @@
 class BadFiles
   def self.register_extensions pattern, &block
-    @@patterns ||= {}
-    @@patterns[pattern] = block
+    @@patterns ||= []
+    @@patterns.push [pattern, block]
   end
 
   def scan path
@@ -10,6 +10,7 @@ class BadFiles
     begin
       entries = Dir.entries(path)
       entries.reject! {|p| ['..', '.'].include? p }
+      entries.reject! {|p| p[0] == '.' }
       entries.map! {|p|File.join(path, p)}
       entries.each do |entry|
         if File.directory? entry
@@ -18,19 +19,22 @@ class BadFiles
           check(entry) ? @bad_files.push(entry) : @good_files.push(entry)
         end
       end
-    rescue IOError
+    rescue
       $stderr.puts "Error accessing #{path}: #{$!}"
     end
   end
 
   def check filename
     begin
-      @@patterns.each do |pattern, handler|
+      checked = false
+      @@patterns.each do |plugin|
+        pattern, handler = plugin
         if File.extname(filename) =~ pattern
           handler.call filename
+          checked = true
         end
       end
-      puts "[ \e[32mOK\e[0m ] #{filename}"
+      puts "[ \e[32mOK\e[0m ] #{filename}" if checked
       nil
     rescue
       puts "[ \e[31mBAD\e[0m ] #{filename}: #{$!}"
@@ -41,7 +45,7 @@ class BadFiles
 
   def print_summary
     puts "\nSummary:"
-    puts "  Good files: #{@good_files.size}"
+    puts "  Tested files: #{@good_files.size + @bad_files.size}"
     puts "  Bad files: #{@bad_files.size}"
     @bad_files.each do |file|
       puts "#{file}"
