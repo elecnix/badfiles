@@ -5,8 +5,8 @@ class BadFiles
   end
 
   def scan path
-    @bad_files = []
-    @good_files = []
+    @bad_files ||= []
+    @good_files ||= []
     begin
       entries = Dir.entries(path)
       entries.reject! {|p| ['..', '.'].include? p }
@@ -34,7 +34,8 @@ class BadFiles
           checked = true
         end
       end
-      puts "[ \e[32mOK\e[0m ] #{filename}" if checked
+      # TODO don't print here - delegate to block
+      #puts "[ \e[32mOK\e[0m ] #{filename}" if checked
       nil
     rescue
       puts "[ \e[31mBAD\e[0m ] #{filename}: #{$!}"

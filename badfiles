@@ -7,3 +7,5 @@ bf = BadFiles.new
 bf.scan File.expand_path(ARGV[0])
 bf.print_summary
 
+# TODO Add support for --no-<plugin> to skip any plugin
+# TODO Add --verbose to print OK files, and name of plugins used
