@@ -19,6 +19,7 @@ bundle install
 
 Supported:
  * JPG, PNG, GIF, PDF
+ * <filename>.md5
 
 Unsupported:
  * LibreOffice
